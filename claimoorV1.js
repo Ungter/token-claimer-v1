@@ -8,7 +8,7 @@ const PRIVATE_KEY = "";
 const YOUR_ADDRESS = "";
 
 
-const providerArbi = new ethers.InfuraProvider("arbitrum", [INFURA_API]); // feel free to change the network
+const providerArbi = new ethers.InfuraProvider("arbitrum", [INFURA_API]); 
 const providerMainnet = new ethers.InfuraProvider("homestead", [INFURA_API]); // this was the chain where countdown happened,
                                                                               // most of the projects counts down on 
                                                                               // the mainnet blocks
@@ -32,12 +32,16 @@ const claimContract = new ethers.Contract(CLAIM_CONTRACT_ADDRESS, claimAbi, wall
 
 async function waitForBlockNumber() {
     let blockNumber = await providerMainnet.getBlockNumber();
+    let timeoutDelay = 10000;
     while (blockNumber < TARGET_BLOCK_NUMBER) {
       console.log("Current block number:", blockNumber);
       console.log("Blocks to go:", TARGET_BLOCK_NUMBER - blockNumber);
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // 1000 stands for 1 second, 
+      await new Promise((resolve) => setTimeout(resolve, timeoutDelay)); // 1000 stands for 1 second, 
                                                                  // change it to whatever you want,
                                                                  // beware of your request limit
+      if (TARGET_BLOCK_NUMBER - blockNumber < 4) {
+        timeoutDelay = 300; // time to spam check
+      }
       blockNumber = await providerMainnet.getBlockNumber();
     }
 }
