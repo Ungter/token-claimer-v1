@@ -33,8 +33,8 @@ const claimContract = new ethers.Contract(CLAIM_CONTRACT_ADDRESS, claimAbi, wall
 async function waitForBlockNumber() {
     let blockNumber = await providerMainnet.getBlockNumber();
     while (blockNumber < TARGET_BLOCK_NUMBER) {
-      console.log("Waiting for block number", TARGET_BLOCK_NUMBER);
       console.log("Current block number:", blockNumber);
+      console.log("Blocks to go:", TARGET_BLOCK_NUMBER - blockNumber);
       await new Promise((resolve) => setTimeout(resolve, 1000)); // 1000 stands for 1 second, 
                                                                  // change it to whatever you want,
                                                                  // beware of your request limit
