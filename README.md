@@ -1,5 +1,5 @@
 # token-claimer-v1
-zero-second delay claims of tokens (ex: airdrop, LGE) then sends to your address of choice to dump on them plebs
+zero-second delay claims of tokens (ex: airdrop, LGE) then sends to your address(exchange) of choice to dump on them plebs
 
 ## Requirement: 
 npm install ethers
